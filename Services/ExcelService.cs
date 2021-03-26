@@ -28,9 +28,9 @@ namespace Services
                     ConfigureDataTable = _ => new ExcelDataTableConfiguration { UseHeaderRow = true }
                 });
             }
-            catch (Exception ex) when (ex is HeaderException)
+            catch (Exception)
             {
-                throw new InvalidDataException("Invalid Employee Excel Header");
+                throw new InvalidDataException("Invalid excel file stream");
             }
 
             return result;

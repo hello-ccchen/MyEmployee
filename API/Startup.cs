@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Services;
+using Services.Helpers;
 
 namespace API
 {
@@ -52,6 +53,9 @@ namespace API
 			{
 				endpoints.MapControllers();
 			});
+
+			// https://github.com/ExcelDataReader/ExcelDataReader#important-note-on-net-core
+			ExcelDataReaderHelper.AddEncodingSupport();
 		}
 	}
 }

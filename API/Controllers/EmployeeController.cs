@@ -29,7 +29,6 @@ namespace API.Controllers
 			if (!AcceptedFileTypes.Contains(Path.GetExtension(files[0].FileName)))
 				return BadRequest();
 
-			System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
 			using var excelFileStream = new MemoryStream();
 			files[0].CopyTo(excelFileStream);
 			excelFileStream.Position = 0;
