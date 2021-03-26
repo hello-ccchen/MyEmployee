@@ -21,19 +21,19 @@ namespace API.Controllers
 		[HttpPost]
 		public IActionResult UploadExcel()
 		{
-			var files = Request.Form.Files;
+			var file = Request.Form.Files[0];
 
-			if (files == null)
+			if (file == null)
 				return BadRequest();
 
-			if (!AcceptedFileTypes.Contains(Path.GetExtension(files[0].FileName)))
+			if (!AcceptedFileTypes.Contains(Path.GetExtension(file.FileName)))
 				return BadRequest();
 
-			using var excelFileStream = new MemoryStream();
-			files[0].CopyTo(excelFileStream);
-			excelFileStream.Position = 0;
+			using var memoryStream = new MemoryStream();
+			file.CopyTo(memoryStream);
+			memoryStream.Position = 0;
 
-			var result = _excelService.ReadEmployeeExcelFile(excelFileStream);
+			var result = _excelService.ReadEmployeeExcelFile(memoryStream);
 
 			return Ok(result);
 		}
