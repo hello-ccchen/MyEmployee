@@ -27,7 +27,7 @@ namespace Services
                     ConfigureDataTable = _ => new ExcelDataTableConfiguration { UseHeaderRow = true }
                 });
             }
-            catch (Exception)
+            catch
             {
                 throw new InvalidDataException("Invalid excel file stream");
             }
@@ -38,7 +38,7 @@ namespace Services
         private static List<Employee> GetEmployeeEntries(DataSet result)
         {
             var entries = new List<Employee>();
-            var rows = result.Tables[0].Select();
+            var rows = result?.Tables[0].Select();
 
             foreach (var row in rows)
             {
